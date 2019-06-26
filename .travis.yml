@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t jfouriex/multi-docker -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run jfouriex/multi-docker npm test -- --coverage
+
+after_success:
+  - docker build -t jfouriex/multi-client ./client
+  - docker build -t jfouriex/multi-nginx ./nginx
+  - docker build -t jfouriex/multi-server ./server
+  - docker build -t jfouriex/multi-worker ./worker 
+
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push jfouriex/multi-client
+  - docker push jfouriex/multi-nginx
+  - docker push jfouriex/multi-server
+  - docker push jfouriex/multi-worker
+  
