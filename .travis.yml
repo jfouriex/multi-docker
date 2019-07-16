@@ -27,7 +27,7 @@ deploy:
   app: "multi-docker"
   env: "MultiDocker-env"
   bucket_name: "elasticbeanstalk-eu-north-1-644429775120"
-  bucket_path: "react-app"
+  bucket_path: "docker_multi"
   on: 
     branch: master
   access_key_id: 
