@@ -20,4 +20,18 @@ after_success:
   - docker push jfouriex/multi-nginx
   - docker push jfouriex/multi-server
   - docker push jfouriex/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-644429775120"
+  bucket_path: "react-app"
+  on: 
+    branch: master
+  access_key_id: 
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
   
